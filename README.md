@@ -141,6 +141,8 @@ All code in this project is extensively commented with:
 - **Inline comments** - Explaining complex logic and important decisions
 - **Type hints** - Making code more readable and maintainable
 
+For detailed information about the documentation standards used in this project, see [DOCUMENTATION_STANDARDS.md](DOCUMENTATION_STANDARDS.md).
+
 ### Example of Code Comment Quality
 
 Every function includes comprehensive documentation:
