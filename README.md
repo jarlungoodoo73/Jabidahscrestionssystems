@@ -99,11 +99,37 @@ Jabidahscrestionssystems/
 │   ├── __init__.py          # Package initialization
 │   ├── task_manager.py      # Core task management classes (Task, TaskManager)
 │   └── cli.py               # Command-line interface
+├── tests/                    # Unit tests
+│   ├── __init__.py          # Tests package initialization
+│   └── test_task_manager.py # Comprehensive tests for Task and TaskManager
 ├── example.py               # Example usage script
 ├── README.md                # This file - project documentation
 ├── LICENSE                  # MIT License
 └── .gitignore              # Git ignore patterns
 ```
+
+## Testing
+
+The project includes comprehensive unit tests. To run the tests:
+
+```bash
+# Run all tests
+python -m unittest discover tests
+
+# Run with verbose output
+python -m unittest discover tests -v
+
+# Run a specific test file
+python -m unittest tests.test_task_manager
+
+# Run a specific test class
+python -m unittest tests.test_task_manager.TestTask
+
+# Run a specific test method
+python -m unittest tests.test_task_manager.TestTask.test_task_creation
+```
+
+All tests include detailed docstrings explaining what they test and why.
 
 ## Code Documentation
 
