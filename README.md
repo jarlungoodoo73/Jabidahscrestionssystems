@@ -1,16 +1,26 @@
-# Jabidah Task Management System
+# Jabidah Task & Agent Management System
 
 ## Description
 
-This repository contains a complete Task Management System with well-documented, extensively commented Python code. The project demonstrates best practices in code documentation and serves as both a functional application and an educational resource.
+This repository contains a complete Task & Agent Management System with well-documented, extensively commented Python code. The project demonstrates best practices in code documentation and serves as both a functional application and an educational resource.
 
 ### Features
 
+**Task Management:**
 - **Create and manage tasks** - Add tasks with titles, descriptions, and priority levels
 - **Track completion** - Mark tasks as complete or incomplete with timestamps
 - **Filter and search** - List tasks by completion status or priority level
 - **Statistics** - View comprehensive statistics about your tasks
-- **Command-line interface** - Interactive CLI for easy task management
+
+**Agent Management:**
+- **Create and manage agents** - Add agents who can be assigned to work on tasks
+- **Agent assignment** - Assign agents to tasks and track their workload
+- **Position tracking** - Monitor agent positions/status (available, busy, offline)
+- **Agent monitoring** - Watch and control agent workflow across all tasks
+- **Agent statistics** - View comprehensive statistics about agent assignments and status
+
+**Additional Features:**
+- **Command-line interface** - Interactive CLI for easy task and agent management
 - **Well-commented code** - Every function and class includes detailed comments explaining functionality
 
 ## Getting Started
@@ -41,14 +51,27 @@ python -m src.cli
 ```
 
 This will launch an interactive menu where you can:
+
+**Task Management:**
 1. Create new tasks
 2. List all tasks (or filter by status)
 3. View detailed task information
 4. Mark tasks as complete/incomplete
 5. Update existing tasks
 6. Delete tasks
-7. View statistics
+7. View task statistics
 8. Clear completed tasks
+
+**Agent Management:**
+9. Create new agents
+10. List all agents (or filter by position)
+11. View detailed agent information
+12. Assign agents to tasks
+13. Unassign agents from tasks
+14. Update agent positions
+15. Monitor all agents
+16. View agent statistics
+17. Delete agents
 
 ### Running the Example Script
 
@@ -58,12 +81,13 @@ To see a demonstration of the system's capabilities:
 python example.py
 ```
 
-This script shows programmatic usage of the Task and TaskManager classes.
+This script demonstrates both task management and agent management features including agent assignment and monitoring.
 
 ### Using as a Library
 
 You can also import and use the classes in your own Python code:
 
+**Task Management:**
 ```python
 from src.task_manager import TaskManager
 
@@ -90,6 +114,40 @@ stats = manager.get_stats()
 print(f"Total tasks: {stats['total']}")
 ```
 
+**Agent Management:**
+```python
+from src.task_manager import TaskManager, AgentManager
+
+# Create managers
+task_manager = TaskManager()
+agent_manager = AgentManager()
+
+# Create an agent
+agent = agent_manager.create_agent(
+    name="John Doe",
+    position="available"
+)
+
+# Create a task
+task = task_manager.create_task(
+    title="Important task",
+    priority="high"
+)
+
+# Assign agent to task
+agent_manager.assign_agent_to_task(agent.agent_id, task)
+
+# Monitor all agents
+monitoring_data = agent_manager.monitor_all_agents()
+for data in monitoring_data:
+    print(f"Agent {data['name']}: {data['task_count']} tasks")
+
+# Get agent statistics
+stats = agent_manager.get_stats()
+print(f"Total agents: {stats['total']}")
+print(f"Busy agents: {stats['busy']}")
+```
+
 
 ## Project Structure
 
@@ -97,11 +155,11 @@ print(f"Total tasks: {stats['total']}")
 Jabidahscrestionssystems/
 ├── src/                      # Source code directory
 │   ├── __init__.py          # Package initialization
-│   ├── task_manager.py      # Core task management classes (Task, TaskManager)
-│   └── cli.py               # Command-line interface
+│   ├── task_manager.py      # Core task and agent management classes
+│   └── cli.py               # Command-line interface for tasks and agents
 ├── tests/                    # Unit tests
 │   ├── __init__.py          # Tests package initialization
-│   └── test_task_manager.py # Comprehensive tests for Task and TaskManager
+│   └── test_task_manager.py # Comprehensive tests for Task, TaskManager, Agent, and AgentManager
 ├── example.py               # Example usage script
 ├── README.md                # This file - project documentation
 ├── LICENSE                  # MIT License
@@ -110,7 +168,7 @@ Jabidahscrestionssystems/
 
 ## Testing
 
-The project includes comprehensive unit tests. To run the tests:
+The project includes comprehensive unit tests for all classes. To run the tests:
 
 ```bash
 # Run all tests
@@ -201,6 +259,30 @@ Manages a collection of tasks with these methods:
 - `list_tasks(completed, priority)` - List tasks with optional filters
 - `get_stats()` - Get statistics about all tasks
 - `clear_completed()` - Remove all completed tasks
+
+### Agent Class
+
+Represents a single agent with the following methods:
+
+- `__init__(agent_id, name, position)` - Create a new agent
+- `assign_task(task_id)` - Assign a task to this agent
+- `unassign_task(task_id)` - Unassign a task from this agent
+- `update_position(position)` - Update the agent's position/status
+- `to_dict()` - Convert agent to dictionary format
+
+### AgentManager Class
+
+Manages a collection of agents with these methods:
+
+- `create_agent(name, position)` - Create and add a new agent
+- `get_agent(agent_id)` - Retrieve an agent by ID
+- `delete_agent(agent_id)` - Delete an agent by ID
+- `list_agents(position)` - List agents with optional filter by position
+- `assign_agent_to_task(agent_id, task)` - Assign an agent to a task
+- `unassign_agent_from_task(agent_id, task)` - Unassign an agent from a task
+- `get_agent_tasks(agent_id, task_manager)` - Get all tasks assigned to an agent
+- `get_stats()` - Get statistics about all agents
+- `monitor_all_agents()` - Get monitoring data for all agents
 
 ## Contributing
 
